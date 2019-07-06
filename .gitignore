@@ -1,0 +1,11 @@
+.idea/
+
+.DS_Store
+
+runtime/*
+
+vendor
+
+expenditure
+
+conf/app.ini

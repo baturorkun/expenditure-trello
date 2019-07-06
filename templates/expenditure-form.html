@@ -1,0 +1,99 @@
+{{ define "content" }}
+
+{{ if .Msg }}
+    <div class="alert alert-primary" role="alert">
+       {{.Msg}}
+    </div>
+{{ end }}
+
+<form action="/save" method="post">
+
+<div class="container">
+    <div class="row clearfix">
+
+        <div class="col-md-12 table-responsive">
+            <h3>Expenditure Form</h3>
+            <hr>
+        </div>
+
+        <div class="col-md-12 table-responsive">
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Title</label>
+                <input type="input" class="form-control" name="title" id="exampleFormControlInput1" placeholder="Title" required="true">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Email address</label>
+                <input type="email" class="form-control" name="email"  id="exampleFormControlInput1" placeholder="name@example.com" required="true">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Example file input</label>
+                <input type="file" class="form-control-file"  name="attachment" id="exampleFormControlFile1">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Notes</label>
+                <textarea name="notes" placeholder="Description" class="form-control"></textarea>
+            </div>
+
+        </div>
+
+        <div class="col-md-12 table-responsive">
+            <table class="table table-bordered table-hover table-sortable" id="tab_logic">
+                <thead>
+                <tr >
+                    <th class="text-center">
+                        Name
+                    </th>
+                    <th class="text-center">
+                        Price
+                    </th>
+                    <th class="text-center">
+                        Notes
+                    </th>
+                    <!--
+                    <th class="text-center">
+                        Option
+                    </th>
+                    -->
+                    <th class="text-center" style="border-top: 1px solid #ffffff; border-right: 1px solid #ffffff;">
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr id='addr0' data-id="0" class="hidden">
+                    <td data-name="name">
+                        <input type="text" name='name0'  placeholder='Name' class="form-control" required="true"/>
+                    </td>
+                    <td data-name="price">
+                        <input type="text" name='price0' placeholder='Price' class="form-control" required="true"/>
+                    </td>
+                    <td data-name="desc">
+                        <input type="text" name='desc0' placeholder='Description' class="form-control"/>
+                       <!-- <textarea name="desc0" placeholder="Description" class="form-control"></textarea> -->
+                    </td>
+                  <!--
+                    <td data-name="sel">
+                        <select name="sel0">
+                            <option value="">Select Option</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </td>
+                    -->
+                    <td data-name="del">
+                        <button name="del0" class='btn btn-danger glyphicon glyphicon-remove row-remove'><span aria-hidden="true">×</span></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <a id="add_row" class="btn btn-primary float-right">Add Row</a>
+
+    <input type="submit" value="Submit" class="btn btn-primary" >
+</div>
+
+
+</form>
+
+{{end}}

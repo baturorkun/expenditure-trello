@@ -1,0 +1,19 @@
+[app]
+
+Title = "ExpenditureForm"
+
+AllowIps = All
+# AllowIps = 192.168.1.1, 192.168.2.1,  192.168.3.1
+
+[trello]
+AppKey = "14b1040607bad67a795b116e52b0e66c"
+Token = "b4v194a44be5278be797846acae003be9a6961d037a67802a3d12f30a0bb17ef"
+BoardID = "KA4wwprD"
+ListNumber = 1
+
+[server]
+RunMode = debug
+Port = :8000
+ReadTimeout = 60
+WriteTimeout = 60
+
