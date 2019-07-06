@@ -1,4 +1,4 @@
-###Expenditure Form With Trello Integration
+### Expenditure Form With Trello Integration
 
 This application being developed in GoLang and gives you a chance that storing expenditure form to Trello as a card. Users don't need Trello account and don't know using Trello. The system provides a fancy HTML form to save cards to Trello.
 
@@ -27,7 +27,7 @@ Example app.ini file:
 >ReadTimeout = 60
 >WriteTimeout = 60
 
-######Another important parameters:
+###### Another important parameters:
 
 BoardID : Every board has a ID on Trello like "KE4wqorD". You can see it on the URL when then board url is open.
 
@@ -41,7 +41,7 @@ Port : You can change server port in server trunk.
 
 go tun main.go
 
-###Install
+### Install
 
 go build .
 go install
