@@ -2,36 +2,35 @@ package setting
 
 import (
 	"flag"
+	"github.com/go-ini/ini"
 	"log"
 	"time"
-	"github.com/go-ini/ini"
 )
 
 type App struct {
-	Title 			string
+	Title    string
+	AllowIps string
 }
 
 var AppSetting = &App{}
 
 type Server struct {
-	RunMode      	string
-	Port         	string
-	ReadTimeout  	time.Duration
-	WriteTimeout 	time.Duration
+	RunMode      string
+	Port         string
+	ReadTimeout  time.Duration
+	WriteTimeout time.Duration
 }
 
 var ServerSetting = &Server{}
 
-
 type Trello struct {
-	AppKey 		string
-	Token 		string
-	BoardID		string
-	ListNumber	int
+	AppKey     string
+	Token      string
+	BoardID    string
+	ListNumber int
 }
 
 var TrelloSetting = &Trello{}
-
 
 var cfg *ini.File
 

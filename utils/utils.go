@@ -19,6 +19,16 @@ func KeyInSlice(key int, list [][]string) bool {
 	return false
 }
 
+func ValueInSlice(val string, list []string) bool {
+	for _, v := range list {
+		if v == val {
+			return true
+		}
+	}
+
+	return false
+}
+
 func RandStringRunes(n int) string {
 
 	rand.Seed(time.Now().UnixNano())
@@ -31,7 +41,7 @@ func RandStringRunes(n int) string {
 	return string(b)
 }
 
-func GetRemoteFile(url string) (fileName string,downloadSize int64 ) {
+func GetRemoteFile(url string) (fileName string, downloadSize int64) {
 
 	subStringsSlice := strings.Split(url, "/")
 	fileName = subStringsSlice[len(subStringsSlice)-1]
@@ -57,3 +67,10 @@ func GetRemoteFile(url string) (fileName string,downloadSize int64 ) {
 	return
 }
 
+func SplitString(s string) []string {
+
+	s = strings.Replace(s, " ", "", -1)
+
+	return strings.Split(s, ",")
+
+}
