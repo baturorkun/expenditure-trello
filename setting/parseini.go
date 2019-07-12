@@ -10,6 +10,9 @@ import (
 type App struct {
 	Title    string
 	AllowIps string
+	Users    []string
+	Currency []string
+	Expense  []string
 }
 
 var AppSetting = &App{}
@@ -56,7 +59,7 @@ func Setup() {
 func mapTo(section string, v interface{}) {
 	err := cfg.Section(section).MapTo(v)
 	if err != nil {
-		log.Fatalf("Cfg.MapTo RedisSetting err: %v", err)
+		log.Fatalf("Cfg.MapTo err: %v", err)
 	}
 }
 

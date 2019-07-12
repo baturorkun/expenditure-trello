@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"html/template"
+	"io/ioutil"
 	"log"
 	"net"
 	"net/http"
@@ -17,8 +18,10 @@ import (
 )
 
 type PageData struct {
-	Title string
-	Msg   string
+	Title    string
+	Msg      string
+	Currency []string
+	Expense  []string
 }
 
 func cleanup() {
@@ -44,6 +47,7 @@ func main() {
 
 	mx.HandleFunc("/", Enter)
 	mx.HandleFunc("/save", Save)
+	mx.HandleFunc("/attach/{file}", Attach)
 
 	// http serves
 	http.Handle("/", mx)
@@ -97,7 +101,14 @@ func Enter(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
 
-	tmpl.Execute(w, PageData{Title: setting.AppSetting.Title, Msg: r.Form.Get("msg")})
+	tmpl.Execute(w, PageData{
+		Title:    setting.AppSetting.Title,
+		Msg:      r.Form.Get("msg"),
+		Currency: setting.AppSetting.Currency,
+		Expense:  setting.AppSetting.Expense,
+	})
+
+	log.Println("Data ->", setting.AppSetting.Expense)
 
 }
 
@@ -111,9 +122,33 @@ func Save(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
 
-	card := lib.CreateCard(r.PostForm)
+	filename, err := lib.UploadFile(r)
+
+	if err != nil {
+		log.Fatalln("Error ->", err)
+	}
+
+	card := lib.CreateCard(r, filename)
 
 	//lib.AddCard(card)
 
 	http.Redirect(w, r, "/?msg=Your expenditure card was saved. "+card.Name, http.StatusPermanentRedirect)
+}
+
+func Attach(w http.ResponseWriter, r *http.Request) {
+
+	log.Println("Request ->", r.URL.Path)
+
+	vars := mux.Vars(r)
+
+	log.Println("VARS ->", vars)
+
+	dat, err := ioutil.ReadFile("/tmp/" + vars["file"])
+
+	if err != nil {
+		log.Fatalln("Error ->", err)
+	}
+
+	w.Write(dat)
+
 }

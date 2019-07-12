@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+
     $("#add_row").on("click", function() {
         // Dynamic Rows Code
 
@@ -40,6 +42,7 @@ $(document).ready(function() {
             }
         });
 
+
         // add delete button and td
         /*
         $("<td></td>").append(
@@ -53,11 +56,15 @@ $(document).ready(function() {
         // add the new row
         $(tr).appendTo($('#tab_logic'));
 
+        $('input.datepicker').datepicker();
+
+
         $(tr).find("td button.row-remove").on("click", function() {
             $(this).closest("tr").remove();
         });
-    });
 
+
+    });
 
 
 
@@ -80,6 +87,10 @@ $(document).ready(function() {
     $(".table-sortable thead").disableSelection();
 
 
-
     $("#add_row").trigger("click");
+
+
+    $('.datepicker').datepicker();
+
+
 });

@@ -6,7 +6,7 @@
     </div>
 {{ end }}
 
-<form action="/save" method="post">
+<form action="/save" method="post"  enctype="multipart/form-data">
 
 <div class="container">
     <div class="row clearfix">
@@ -41,45 +41,58 @@
                 <thead>
                 <tr >
                     <th class="text-center">
-                        Name
+                        Date
                     </th>
                     <th class="text-center">
-                        Price
+                        Expense Type
+                    </th>
+                    <th class="text-center">
+                        Amount
                     </th>
                     <th class="text-center">
                         Notes
                     </th>
-                    <!--
+
                     <th class="text-center">
-                        Option
+                        Currency
                     </th>
-                    -->
+
                     <th class="text-center" style="border-top: 1px solid #ffffff; border-right: 1px solid #ffffff;">
                     </th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr id='addr0' data-id="0" class="hidden">
-                    <td data-name="name">
-                        <input type="text" name='name0'  placeholder='Name' class="form-control" required="true"/>
+
+                    <td data-name="date">
+                        <input type="text" name='date0' placeholder='Date' class="form-control datepicker" required="true"/>
                     </td>
-                    <td data-name="price">
-                        <input type="text" name='price0' placeholder='Price' class="form-control" required="true"/>
+
+                    <td data-name="sel">
+                        <select name="expense0">
+                            {{range .Expense}}
+                                <option value="{{.}}">{{.}}</option>
+                            {{end}}
+                        </select>
                     </td>
+
+                    <td data-name="amount">
+                        <input type="text" name='amount0' placeholder='Amount' class="form-control" required="true"/>
+                    </td>
+
                     <td data-name="desc">
                         <input type="text" name='desc0' placeholder='Description' class="form-control"/>
                        <!-- <textarea name="desc0" placeholder="Description" class="form-control"></textarea> -->
                     </td>
-                  <!--
+
                     <td data-name="sel">
-                        <select name="sel0">
-                            <option value="">Select Option</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
+                        <select name="currency0">
+                            {{range .Currency}}
+                            <option value="{{.}}">{{.}}</option>
+                            {{end}}
                         </select>
                     </td>
-                    -->
+
                     <td data-name="del">
                         <button name="del0" class='btn btn-danger glyphicon glyphicon-remove row-remove'><span aria-hidden="true">×</span></button>
                     </td>

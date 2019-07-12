@@ -10,7 +10,6 @@ import (
 	"strings"
 )
 
-
 func Form2Array(form url.Values) (res [][]string) {
 
 	log.Printf(">> %+v", form)
@@ -27,13 +26,13 @@ func Form2Array(form url.Values) (res [][]string) {
 			continue
 		}
 
-		n,_ := strconv.Atoi(match)
+		n, _ := strconv.Atoi(match)
 
 		if !utils.KeyInSlice(n, res) {
 			res = append(res, []string{})
 		}
 
-		log.Printf("%s %s", i,v[0])
+		log.Printf("%s %s", i, v[0])
 
 		res[n] = append(res[n], v[0])
 	}
@@ -41,12 +40,12 @@ func Form2Array(form url.Values) (res [][]string) {
 	return res
 }
 
-func CreateMDTable(data [][]string ) string  {
+func CreateMDTable(data [][]string) string {
 
 	tableString := &strings.Builder{}
 	table := tablewriter.NewWriter(tableString)
 	table.SetRowLine(true)
-	table.SetHeader([]string{"Name", "Price", "Desc"})
+	table.SetHeader([]string{"Date", "Expense", "Amount", "Notes", "Currency"})
 	table.SetBorders(tablewriter.Border{Left: true, Top: true, Right: true, Bottom: true})
 	table.SetCenterSeparator("|")
 	table.SetRowSeparator("-")
