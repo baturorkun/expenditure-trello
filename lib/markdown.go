@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-func Form2Array(form url.Values) (res [][]string) {
+func Form2Map(form url.Values) (res []map[string]string) {
 
 	log.Printf(">> %+v", form)
 
@@ -28,16 +28,30 @@ func Form2Array(form url.Values) (res [][]string) {
 
 		n, _ := strconv.Atoi(match)
 
-		if !utils.KeyInSlice(n, res) {
-			res = append(res, []string{})
+		field := strings.Replace(i, match, "", -1)
+
+		if !utils.KeyInMap(n, res) {
+			m := make(map[string]string)
+			res = append(res, m)
 		}
 
 		log.Printf("%s %s", i, v[0])
 
-		res[n] = append(res[n], v[0])
+		//res[n] = append(res[n], v[0])
+		res[n][field] = v[0]
 	}
 
 	return res
+}
+
+func Map2Array(val []map[string]string) (res [][]string) {
+
+	for _, m := range val {
+
+		res = append(res, []string{m["date"], m["expense"], m["currency"], m["notes"]})
+	}
+
+	return
 }
 
 func CreateMDTable(data [][]string) string {
@@ -45,7 +59,7 @@ func CreateMDTable(data [][]string) string {
 	tableString := &strings.Builder{}
 	table := tablewriter.NewWriter(tableString)
 	table.SetRowLine(true)
-	table.SetHeader([]string{"Date", "Expense", "Amount", "Notes", "Currency"})
+	table.SetHeader([]string{"Date", "Expense", "Amount", "Currency", "Notes"})
 	table.SetBorders(tablewriter.Border{Left: true, Top: true, Right: true, Bottom: true})
 	table.SetCenterSeparator("|")
 	table.SetRowSeparator("-")

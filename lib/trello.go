@@ -36,7 +36,9 @@ func CreateCard(r *http.Request, filename string) (card *trello.Card) {
 
 	form := r.PostForm
 
-	arr := Form2Array(form)
+	m := Form2Map(form)
+
+	arr := Map2Array(m)
 
 	table := CreateMDTable(arr)
 
@@ -58,8 +60,10 @@ func CreateCard(r *http.Request, filename string) (card *trello.Card) {
 		log.Fatalln("Error on creating card", err.Error())
 	}
 
-	attachUrl := "http://" + r.Host + "/attach/exp_" + filename
-	addAttach(card, attachUrl)
+	if filename != "" {
+		attachUrl := "http://" + r.Host + "/attach/exp_" + filename
+		addAttach(card, attachUrl)
+	}
 
 	return
 }

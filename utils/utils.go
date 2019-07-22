@@ -10,6 +10,15 @@ import (
 	"time"
 )
 
+func KeyInMap(key int, list []map[string]string) bool {
+	for k, _ := range list {
+		if k == key {
+			return true
+		}
+	}
+	return false
+}
+
 func KeyInSlice(key int, list [][]string) bool {
 	for k, _ := range list {
 		if k == key {

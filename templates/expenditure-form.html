@@ -6,7 +6,7 @@
     </div>
 {{ end }}
 
-<form action="/save" method="post"  enctype="multipart/form-data">
+<form action="/save" method="post">
 
 <div class="container">
     <div class="row clearfix">
@@ -68,8 +68,8 @@
                         <input type="text" name='date0' placeholder='Date' class="form-control datepicker" required="true"/>
                     </td>
 
-                    <td data-name="sel">
-                        <select name="expense0">
+                    <td data-name="expense">
+                        <select name="expense0" required="true">
                             {{range .Expense}}
                                 <option value="{{.}}">{{.}}</option>
                             {{end}}
@@ -85,7 +85,7 @@
                        <!-- <textarea name="desc0" placeholder="Description" class="form-control"></textarea> -->
                     </td>
 
-                    <td data-name="sel">
+                    <td data-name="currency" required="true">
                         <select name="currency0">
                             {{range .Currency}}
                             <option value="{{.}}">{{.}}</option>
