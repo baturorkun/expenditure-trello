@@ -5,7 +5,6 @@ import (
 	"expenditure/setting"
 	"expenditure/utils"
 	"fmt"
-	"github.com/adlio/trello"
 	"github.com/gorilla/mux"
 	"html/template"
 	"io/ioutil"
@@ -119,24 +118,28 @@ func Save(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var card *trello.Card
-
 	log.Println("Request ->", r.URL.Path)
 
-	r.ParseForm()
+	r.ParseMultipartForm(0)
 
-	if r.PostForm.Get("attachment") != "" {
+	file, _, _ := r.FormFile("attachment")
+
+	if file != nil {
 		filename, err := lib.UploadFile(r)
 		if err != nil {
 			log.Fatalln("Error ->", err)
 		}
-		card = lib.CreateCard(r, filename)
+		card := lib.CreateCard(r, filename)
+
+		log.Println("Added Card with attach : ", card.Name)
 
 	} else {
-		card = lib.CreateCard(r, "")
+		card := lib.CreateCard(r, "")
+
+		log.Println("Added Card : ", card.Name)
 	}
 
-	http.Redirect(w, r, "/?msg=Your expenditure card was saved. "+card.Name, http.StatusPermanentRedirect)
+	http.Redirect(w, r, "/?msg=Your expenditure card was saved", http.StatusPermanentRedirect)
 }
 
 func Attach(w http.ResponseWriter, r *http.Request) {

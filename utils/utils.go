@@ -83,3 +83,13 @@ func SplitString(s string) []string {
 	return strings.Split(s, ",")
 
 }
+
+func FixSize(str string, size int) string {
+
+	for i := 1; i < size-len(str); i++ {
+		str = str + "_"
+	}
+
+	return str
+
+}
