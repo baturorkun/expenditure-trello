@@ -54,6 +54,14 @@ go install
 ./expenditure
 ```
 
+### Running on Docker
+```
+docker build . -t expenditure
+
+docker run -p 8000:8000 expenditure
+
+```
+
 ### Usage
 
 > Open " http://[your ip]:8000 " on your  browser.
